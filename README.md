@@ -1,0 +1,1 @@
+# open5gs_epc_srsran_sample_config
