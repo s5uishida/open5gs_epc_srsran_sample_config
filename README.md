@@ -436,7 +436,7 @@ make
 
 <h4 id="build_ran">Case RAN on VM3</h4>
 
-Copy the config files as follows and configure as [this](https://github.com/s5uishida/open5gs_epc_srsran_sample_config/blob/main/README.md#changes-in-configuration-files-of-ran).
+Copy the config files as follows and configure as [this](https://github.com/s5uishida/open5gs_epc_srsran_sample_config#changes-in-configuration-files-of-ran).
 ```
 cd srsRAN_4G/srsenb
 cp enb.conf.example ../build/srsenb/enb.conf
@@ -447,7 +447,7 @@ cp sib.conf.example ../build/srsenb/sib.conf
 
 <h4 id="build_ue">Case UE on VM4</h4>
 
-Copy the config files as follows and configure as [this](https://github.com/s5uishida/open5gs_epc_srsran_sample_config/blob/main/README.md#changes-in-configuration-files-of-ue).
+Copy the config files as follows and configure as [this](https://github.com/s5uishida/open5gs_epc_srsran_sample_config#changes-in-configuration-files-of-ue).
 ```
 cd srsRAN_4G/srsue
 cp ue.conf.example ../build/srsue/ue.conf
