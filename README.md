@@ -87,6 +87,11 @@ PDN is as follows.
 | --- | --- | --- | --- |
 | 10.45.0.0/16 | ogstun | internet | tun_srsue |
 
+The main information of eNodeB is as follows.
+| MCC | MNC | TAC | Macro eNodeB ID | Cell ID | E-UTRAN Cell ID |
+| --- | --- | --- | --- | --- | --- |
+| 001 | 01 | 1 | 0x19b | 0x01 | 0x19b01 |
+
 Additional information.
 
 Open5GS EPC U-Plane worked fine on Raspberry Pi 4 Model B. I used [Ubuntu 20.04 (64bit) for Raspberry Pi 4](https://ubuntu.com/download/raspberry-pi) as the OS. I think it would be convenient to place a compact U-Plane in the edge environment and use it as an end-point for PDN.
