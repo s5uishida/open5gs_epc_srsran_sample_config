@@ -88,7 +88,7 @@ PDN is as follows.
 | 10.45.0.0/16 | ogstun | internet | tun_srsue |
 
 The main information of eNodeB is as follows.
-| MCC | MNC | TAC | Macro eNodeB ID | Cell ID | E-UTRAN Cell ID |
+| MCC | MNC | TAC | eNodeB ID | Cell ID | E-UTRAN Cell ID |
 | --- | --- | --- | --- | --- | --- |
 | 001 | 01 | 1 | 0x19b | 0x01 | 0x19b01 |
 
