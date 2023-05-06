@@ -22,6 +22,7 @@ This briefly describes the overall and configuration files.
 <h2 id="misc">Miscellaneous Notes</h2>
 
 - [Install MongoDB 6.0 and Open5GS WebUI](https://github.com/s5uishida/open5gs_install_mongodb6_webui)
+- [Build srsRAN 4G UE / RAN with ZeroMQ by disabling RF plugins](https://github.com/s5uishida/build_srsran_4g_zmq_disable_rf_plugins)
 ---
 
 <h2 id="toc">Table of Contents</h2>
@@ -37,9 +38,6 @@ This briefly describes the overall and configuration files.
   - [Network settings of Open5GS EPC C-Plane](#network_settings_cp)
   - [Network settings of Open5GS EPC U-Plane](#network_settings_up)
 - [Build Open5GS and srsRAN 4G ZMQ UE / RAN](#build)
-  - [Build srsRAN 4G ZMQ UE / RAN](#build_srs)
-    - [Case RAN on VM3](#build_ran)
-    - [Case UE on VM4](#build_ue)
 - [Run Open5GS EPC and srsRAN 4G ZMQ UE / RAN](#run)
   - [Run Open5GS EPC C-Plane](#run_cp)
   - [Run Open5GS EPC U-Plane](#run_up)
@@ -403,60 +401,7 @@ Please refer to the following for building Open5GS and srsRAN 4G ZMQ UE / RAN re
 Install MongoDB on Open5GS EPC C-Plane machine.
 It is not necessary to install MongoDB on Open5GS EPC U-Plane machines.
 [MongoDB Compass](https://www.mongodb.com/products/compass) is a convenient tool to look at the MongoDB database.
-
-<h3 id="build_srs">Build srsRAN 4G ZMQ UE / RAN</h3>
-
-Build UE / RAN with ZeroMQ as follows.
-
-- First, install the required libraries.
-```
-apt install build-essential cmake libfftw3-dev libmbedtls-dev libboost-program-options-dev libconfig++-dev libsctp-dev libzmq3-dev
-```
-- Then clone srsRAN_4G.
-```
-git clone https://github.com/srsran/srsRAN_4G.git
-```
-- Edit `srsRAN_4G/CMakeLists.txt`.
-```diff 
---- CMakeLists.txt.orig 2023-05-02 10:51:19.942559736 +0900
-+++ CMakeLists.txt      2023-05-02 10:51:43.645754492 +0900
-@@ -69,7 +69,7 @@
- option(AUTO_DETECT_ISA       "Autodetect supported ISA extensions"      ON)
- 
- option(ENABLE_GUI            "Enable GUI (using srsGUI)"                ON)
--option(ENABLE_RF_PLUGINS     "Enable RF plugins"                        ON)
-+option(ENABLE_RF_PLUGINS     "Enable RF plugins"                        OFF)
- option(ENABLE_UHD            "Enable UHD"                               ON)
- option(ENABLE_BLADERF        "Enable BladeRF"                           ON)
- option(ENABLE_SOAPYSDR       "Enable SoapySDR"                          ON)
-```
-- Build UE / RAN with ZeroMQ.
-```
-cd srsRAN_4G
-mkdir build
-cd build
-cmake ../
-make
-```
-
-<h4 id="build_ran">Case RAN on VM3</h4>
-
-Copy the config files as follows and configure as [this](https://github.com/s5uishida/open5gs_epc_srsran_sample_config#changes-in-configuration-files-of-ran).
-```
-cd srsRAN_4G/srsenb
-cp enb.conf.example ../build/srsenb/enb.conf
-cp rr.conf.example ../build/srsenb/rr.conf
-cp rb.conf.example ../build/srsenb/rb.conf
-cp sib.conf.example ../build/srsenb/sib.conf
-```
-
-<h4 id="build_ue">Case UE on VM4</h4>
-
-Copy the config files as follows and configure as [this](https://github.com/s5uishida/open5gs_epc_srsran_sample_config#changes-in-configuration-files-of-ue).
-```
-cd srsRAN_4G/srsue
-cp ue.conf.example ../build/srsue/ue.conf
-```
+**See also [this](https://github.com/s5uishida/build_srsran_4g_zmq_disable_rf_plugins) for building srsRAN 4G.**
 
 <h2 id="run">Run Open5GS EPC and srsRAN 4G ZMQ UE / RAN</h2>
 
