@@ -580,6 +580,31 @@ listening on ogstun, link-type RAW (Raw IP), snapshot length 262144 bytes
 19:11:47.944754 IP 10.45.0.2 > 142.250.196.142: ICMP echo request, id 5, seq 3, length 64
 19:11:47.962032 IP 142.250.196.142 > 10.45.0.2: ICMP echo reply, id 5, seq 3, length 64
 ```
+In addition to `ping`, you may try to access the web by specifying the TUNnel interface with `curl` as follows.
+- Run `curl google.com` on VM4 (UE)
+```
+# curl --interface tun_srsue google.com
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="http://www.google.com/">here</A>.
+</BODY></HTML>
+```
+- Run `tcpdump` on VM2 (U-Plane)
+```
+10:21:19.935160 IP 10.45.0.2.49098 > 142.250.207.14.80: Flags [S], seq 2570132212, win 64240, options [mss 1460,sackOK,TS val 518384186 ecr 0,nop,wscale 7], length 0
+10:21:19.952517 IP 142.250.207.14.80 > 10.45.0.2.49098: Flags [S.], seq 2368001, ack 2570132213, win 65535, options [mss 1460], length 0
+10:21:20.128121 IP 10.45.0.2.49098 > 142.250.207.14.80: Flags [.], ack 1, win 64240, length 0
+10:21:20.128171 IP 10.45.0.2.49098 > 142.250.207.14.80: Flags [P.], seq 1:75, ack 1, win 64240, length 74: HTTP: GET / HTTP/1.1
+10:21:20.128358 IP 142.250.207.14.80 > 10.45.0.2.49098: Flags [.], ack 75, win 65535, length 0
+10:21:20.184566 IP 142.250.207.14.80 > 10.45.0.2.49098: Flags [P.], seq 1:774, ack 75, win 65535, length 773: HTTP: HTTP/1.1 301 Moved Permanently
+10:21:20.277245 IP 10.45.0.2.49098 > 142.250.207.14.80: Flags [.], ack 774, win 63467, length 0
+10:21:20.277300 IP 10.45.0.2.49098 > 142.250.207.14.80: Flags [F.], seq 75, ack 774, win 63467, length 0
+10:21:20.277436 IP 142.250.207.14.80 > 10.45.0.2.49098: Flags [.], ack 76, win 65535, length 0
+10:21:20.292707 IP 142.250.207.14.80 > 10.45.0.2.49098: Flags [F.], seq 774, ack 76, win 65535, length 0
+10:21:20.372286 IP 10.45.0.2.49098 > 142.250.207.14.80: Flags [.], ack 775, win 63467, length 0
+```
 You could now create the end-to-end TUN interface on the PDN and send any packets on the network.
 
 ---
