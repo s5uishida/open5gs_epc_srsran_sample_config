@@ -6,7 +6,9 @@ This briefly describes the overall and configuration files.
 
 ---
 
-<h2 id="conf_list">List of Sample Configurations</h2>
+<a id="conf_list"></a>
+
+## List of Sample Configurations
 
 1. One SGW-C/PGW-C, one SGW-U/PGW-U and one APN (this article)
 2. [One SGW-C/PGW-C, Multiple SGW-Us/PGW-Us and APNs](https://github.com/s5uishida/open5gs_epc_oai_sample_config)
@@ -23,7 +25,9 @@ This briefly describes the overall and configuration files.
 13. [VPP-UPF with DPDK](https://github.com/s5uishida/open5gs_5gc_ueransim_vpp_upf_dpdk_sample_config)
 ---
 
-<h2 id="misc">Miscellaneous Notes</h2>
+<a id="misc"></a>
+
+## Miscellaneous Notes
 
 - [Install MongoDB 6.0 and Open5GS WebUI](https://github.com/s5uishida/open5gs_install_mongodb6_webui)
 - [Install MongoDB 4.4.18 on Ubuntu 20.04 for Raspberry Pi 4B](https://github.com/s5uishida/install_mongodb_on_ubuntu_for_rp4b)
@@ -31,7 +35,9 @@ This briefly describes the overall and configuration files.
 - [A Note for Changing Network Interface of UPF from TUN to TAP in Open5GS](https://github.com/s5uishida/change_from_tun_to_tap_in_open5gs)
 ---
 
-<h2 id="toc">Table of Contents</h2>
+<a id="toc"></a>
+
+## Table of Contents
 
 - [Overview of Open5GS CUPS-enabled EPC Simulation Mobile Network](#overview)
 - [Changes in configuration files of Open5GS EPC and srsRAN 4G ZMQ UE / RAN](#changes)
@@ -54,7 +60,9 @@ This briefly describes the overall and configuration files.
 - [Changelog (summary)](#changelog)
 ---
 
-<h2 id="overview">Overview of Open5GS CUPS-enabled EPC Simulation Mobile Network</h2>
+<a id="overview"></a>
+
+## Overview of Open5GS CUPS-enabled EPC Simulation Mobile Network
 
 I created a CUPS-enabled EPC mobile network (Internet reachable) for simulation with the aim of creating an environment in which packets can be sent end-to-end with one PDN for one APN.
 
@@ -102,13 +110,17 @@ Open5GS EPC U-Plane worked fine on Raspberry Pi 4 Model B. I used [Ubuntu 20.04 
 
 In addition, I have not confirmed the communication performance.
 
-<h2 id="changes">Changes in configuration files of Open5GS EPC and srsRAN 4G ZMQ UE / RAN</h2>
+<a id="changes"></a>
+
+## Changes in configuration files of Open5GS EPC and srsRAN 4G ZMQ UE / RAN
 
 Please refer to the following for building Open5GS and srsRAN 4G ZMQ UE / RAN respectively.
 - Open5GS v2.6.3 (2023.05.02) - https://open5gs.org/open5gs/docs/guide/02-building-open5gs-from-sources/
 - srsRAN 4G (2023.05.02) - https://docs.srsran.com/projects/4g/en/latest/
 
-<h3 id="changes_cp">Changes in configuration files of Open5GS EPC C-Plane</h3>
+<a id="changes_cp"></a>
+
+### Changes in configuration files of Open5GS EPC C-Plane
 
 The following parameters including APN can be used in the logic that selects SGW-U as the connection destination by PFCP.
 
@@ -234,7 +246,9 @@ For the sake of simplicity, I used only APN this time. Please refer to [here](ht
  #  o Disable use of IPv4 addresses (only IPv6)
 ```
 
-<h3 id="changes_up">Changes in configuration files of Open5GS EPC U-Plane</h3>
+<a id="changes_up"></a>
+
+### Changes in configuration files of Open5GS EPC U-Plane
 
 - `open5gs/install/etc/open5gs/sgwu.yaml`
 ```diff
@@ -276,9 +290,13 @@ For the sake of simplicity, I used only APN this time. Please refer to [here](ht
          port: 9090
 ```
 
-<h3 id="changes_srs">Changes in configuration files of srsRAN 4G ZMQ UE / RAN</h3>
+<a id="changes_srs"></a>
 
-<h4 id="changes_ran">Changes in configuration files of RAN</h4>
+### Changes in configuration files of srsRAN 4G ZMQ UE / RAN
+
+<a id="changes_ran"></a>
+
+#### Changes in configuration files of RAN
 
 - `srsRAN_4G/build/srsenb/enb.conf`
 ```diff
@@ -324,7 +342,9 @@ For the sake of simplicity, I used only APN this time. Please refer to [here](ht
      dl_earfcn = 3350;
 ```
 
-<h4 id="changes_ue">Changes in configuration files of UE</h4>
+<a id="changes_ue"></a>
+
+#### Changes in configuration files of UE
 
 - `srsRAN_4G/build/srsue/ue.conf`
 ```diff
@@ -367,9 +387,13 @@ For the sake of simplicity, I used only APN this time. Please refer to [here](ht
  #force_imsi_attach = false
 ```
 
-<h2 id="network_settings">Network settings of Open5GS EPC</h2>
+<a id="network_settings"></a>
 
-<h3 id="network_settings_cp">Network settings of Open5GS EPC C-Plane</h3>
+## Network settings of Open5GS EPC
+
+<a id="network_settings_cp"></a>
+
+### Network settings of Open5GS EPC C-Plane
 
 Add IP address for SMF(PGW-C).
 ```
@@ -378,7 +402,9 @@ ip addr add 192.168.0.112/24 dev enp0s8
 **Note. `enp0s8` is the network interface of `192.168.0.0/24` in my VirtualBox environment.
 Please change it according to your environment.**
 
-<h3 id="network_settings_up">Network settings of Open5GS EPC U-Plane</h3>
+<a id="network_settings_up"></a>
+
+### Network settings of Open5GS EPC U-Plane
 
 First, uncomment the next line in the `/etc/sysctl.conf` file and reflect it in the OS.
 ```
@@ -398,7 +424,9 @@ ip link set ogstun up
 iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
 ```
 
-<h2 id="build">Build Open5GS and srsRAN 4G ZMQ UE / RAN</h2>
+<a id="build"></a>
+
+## Build Open5GS and srsRAN 4G ZMQ UE / RAN
 
 Please refer to the following for building Open5GS and srsRAN 4G ZMQ UE / RAN respectively.
 - Open5GS v2.6.3 (2023.05.02) - https://open5gs.org/open5gs/docs/guide/02-building-open5gs-from-sources/
@@ -409,11 +437,15 @@ It is not necessary to install MongoDB on Open5GS EPC U-Plane machines.
 [MongoDB Compass](https://www.mongodb.com/products/compass) is a convenient tool to look at the MongoDB database.
 **See also [this](https://github.com/s5uishida/build_srsran_4g_zmq_disable_rf_plugins) for building srsRAN 4G.**
 
-<h2 id="run">Run Open5GS EPC and srsRAN 4G ZMQ UE / RAN</h2>
+<a id="run"></a>
+
+## Run Open5GS EPC and srsRAN 4G ZMQ UE / RAN
 
 First run the EPC, then the RAN, and the UE.
 
-<h3 id="run_cp">Run Open5GS EPC C-Plane</h3>
+<a id="run_cp"></a>
+
+### Run Open5GS EPC C-Plane
 
 First, run Open5GS EPC C-Plane.
 
@@ -426,7 +458,9 @@ First, run Open5GS EPC C-Plane.
 ./install/bin/open5gs-pcrfd &
 ```
 
-<h3 id="run_up">Run Open5GS EPC U-Plane</h3>
+<a id="run_up"></a>
+
+### Run Open5GS EPC U-Plane
 
 Next, run Open5GS EPC U-Plane.
 
@@ -436,7 +470,9 @@ Next, run Open5GS EPC U-Plane.
 ./install/bin/open5gs-upfd &
 ```
 
-<h3 id="run_ran">Run srsRAN 4G ZMQ RAN</h3>
+<a id="run_ran"></a>
+
+### Run srsRAN 4G ZMQ RAN
 
 Run srsRAN 4G ZMQ RAN and connect to Open5GS EPC.
 ```
@@ -471,7 +507,9 @@ The Open5GS C-Plane log when executed is as follows.
 05/02 18:51:30.868: [mme] INFO: eNB-S1[192.168.0.121] max_num_of_ostreams : 30 (../src/mme/mme-sm.c:148)
 ```
 
-<h3 id="run_ue">Run srsRAN 4G ZMQ UE</h3>
+<a id="run_ue"></a>
+
+### Run srsRAN 4G ZMQ UE
 
 Run srsRAN 4G ZMQ UE and connect to Open5GS EPC.
 ```
@@ -553,11 +591,15 @@ The result of `ip addr show` on VM4 (UE) is as follows.
 ...
 ```
 
-<h2 id="ping">Ping google.com</h2>
+<a id="ping"></a>
+
+## Ping google.com
 
 Specify the TUN interface on VM4 (UE) and try `ping`.
 
-<h3 id="ping_1">Case for going through PDN 10.45.0.0/16</h3>
+<a id="ping_1"></a>
+
+### Case for going through PDN 10.45.0.0/16
 
 Execute `tcpdump` on VM2 (U-Plane) and check that the packet goes through `if=ogstun`.
 - `ping google.com` on VM4 (UE)
@@ -610,6 +652,8 @@ You could now create the end-to-end TUN interface on the PDN and send any packet
 ---
 In investigating private LTE, I have built a simulation environment and can now use a very useful system for investigating CUPS-enabled EPC and MEC of LTE mobile network. I would like to thank the excellent developers and all the contributors of Open5GS and srsRAN 4G.
 
-<h2 id="changelog">Changelog (summary)</h2>
+<a id="changelog"></a>
+
+## Changelog (summary)
 
 - [2023.05.02] Initial release.
