@@ -598,7 +598,7 @@ listening on ogstun, link-type RAW (Raw IP), snapshot length 262144 bytes
 19:11:47.962032 IP 142.250.196.142 > 10.45.0.2: ICMP echo reply, id 5, seq 3, length 64
 ```
 In addition to `ping`, you may try to access the web by specifying the TUNnel interface with `curl` as follows.
-- Run `curl google.com` on VM4 (UE)
+- `curl google.com` on VM4 (UE)
 ```
 # curl --interface tun_srsue google.com
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
