@@ -615,15 +615,6 @@ The document has moved
 20:53:21.668205 IP 142.251.42.174.80 > 10.45.0.2.55352: Flags [F.], seq 774, ack 76, win 65535, length 0
 20:53:21.721297 IP 10.45.0.2.55352 > 142.251.42.174.80: Flags [.], ack 775, win 63467, length 0
 ```
-Also, when trying iperf3 client on VM4 (UE), first change the default GW interface to `tun_srsue`. Below is an example of my VirtualBox VM (VM4).
-```
-# ip link set dev enp0s3 down
-# ip route add default dev tun_srsue
-```
-Next, bind the assigned IP address `10.45.0.2` and run iperf3 client. The following is an example of connecting to iperf3 server running on VM2 `192.168.0.114`.
-```
-# iperf3 -B 10.45.0.2 -c 192.168.0.114
-```
 You could now create the end-to-end TUN interface on the PDN and send any packets on the network.
 
 ---
