@@ -97,13 +97,13 @@ Please refer to the following for building Open5GS and srsRAN 4G ZMQ UE / RAN re
 
 ### Changes in configuration files of Open5GS EPC C-Plane
 
-The following parameters including APN can be used in the logic that selects SGW-U as the connection destination by PFCP.
+The following parameters can be used in the logic that selects SGW-U and UPF(PGW-U) as the connection destination by PFCP.
 
 - APN
 - TAC (Tracking Area Code)
 - e_CellID
 
-For the sake of simplicity, I used only APN this time. Please refer to [here](https://github.com/open5gs/open5gs/pull/560#issue-483001043) for the logic to select SGW-U.
+For the sake of simplicity, I used only APN this time.
 
 - `open5gs/install/etc/open5gs/mme.yaml`
 ```diff
