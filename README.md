@@ -424,11 +424,12 @@ First, run Open5GS EPC C-Plane.
 
 - Open5GS EPC C-Plane
 ```
+./install/bin/open5gs-hssd &
+./install/bin/open5gs-pcrfd &
+sleep 1
 ./install/bin/open5gs-mmed &
 ./install/bin/open5gs-sgwcd &
 ./install/bin/open5gs-smfd &
-./install/bin/open5gs-hssd &
-./install/bin/open5gs-pcrfd &
 ```
 
 <a id="run_up"></a>
